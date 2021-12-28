@@ -74,10 +74,10 @@ public class OrderServiceTest {
         Order 주문 = 주문_생성(1L, 좌석1.getId(), OrderStatus.COOKING, 제육볶음_주문);
         given(menuDao.countByIdIn(anyList())).willReturn(1L);
         given(orderTableDao.findById(any())).willReturn(Optional.of(좌석1));
-        given(orderDao.save(any())).willReturn(주문);
-        given(orderLineItemDao.save(any())).willReturn(제육볶음_주문);
 
         // when
+        when(orderDao.save(any())).thenReturn(주문);
+        when(orderLineItemDao.save(any())).thenReturn(제육볶음_주문);
         Order expected = orderService.create(주문);
 
         // then

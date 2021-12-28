@@ -56,12 +56,11 @@ public class MenuServiceTest {
     @Test
     void createMenu() {
         Menu 제육볶음_메뉴 = 메뉴_생성("제육볶음정식", 6000, 분식.getId(), 제육볶음_상품);
-
-        // given
         given(menuGroupDao.existsById(any(Long.class))).willReturn(true);
         given(productDao.findById(any(Long.class))).willReturn(Optional.of(제육볶음));
-        given(menuDao.save(any(Menu.class))).willReturn(제육볶음_메뉴);
-        given(menuProductDao.save(any(MenuProduct.class))).willReturn(제육볶음_상품);
+
+        when(menuDao.save(any(Menu.class))).thenReturn(제육볶음_메뉴);
+        when(menuProductDao.save(any(MenuProduct.class))).thenReturn(제육볶음_상품);
 
         제육볶음_메뉴 = menuService.create(제육볶음_메뉴);
 

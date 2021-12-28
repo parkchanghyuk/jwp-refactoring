@@ -38,8 +38,8 @@ public class ProductServiceTest {
     @DisplayName("상품을 등록한다.")
     @Test
     void create() {
-        // given
-        given(productDao.save(any(Product.class))).willReturn(product);
+        // when
+        when(productDao.save(any(Product.class))).thenReturn(product);
         Product expectedProduct = productService.create(product);
 
         // then

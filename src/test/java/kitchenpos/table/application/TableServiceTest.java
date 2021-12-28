@@ -37,7 +37,9 @@ public class TableServiceTest {
     void createTable() {
         // given
         OrderTable 좌석 = 좌석_정보(1L, 0, true, null);
-        given(orderTableDao.save(any(OrderTable.class))).willReturn(좌석);
+
+        // when
+        when(orderTableDao.save(any(OrderTable.class))).thenReturn(좌석);
         좌석 = tableService.create(좌석);
 
         // then
@@ -50,6 +52,8 @@ public class TableServiceTest {
         // given
         OrderTable 좌석 = 좌석_정보(1L, 3, true, null);
         given(orderTableDao.findAll()).willReturn(Arrays.asList(좌석));
+
+        // when
         List<OrderTable> 좌석_목록 = tableService.list();
 
         // then
@@ -62,12 +66,12 @@ public class TableServiceTest {
         // given
         OrderTable 좌석 = 좌석_정보(1L, 3, false, null);
         OrderTable 빈_좌석 = 좌석_정보(1L, 0, true, null);
-
         given(orderTableDao.findById(any(Long.class))).willReturn(Optional.of(좌석));
         given(orderDao.existsByOrderTableIdAndOrderStatusIn(any(Long.class),
             anyList())).willReturn(false);
-        given(orderTableDao.save(any(OrderTable.class))).willReturn(빈_좌석);
 
+        //when
+        when(orderTableDao.save(any(OrderTable.class))).thenReturn(빈_좌석);
         좌석 = tableService.changeEmpty(-1L, 좌석);
 
         // then
@@ -79,10 +83,10 @@ public class TableServiceTest {
     void changeNumberOfGuests() {
         // given
         OrderTable 좌석 = 좌석_정보(1L, 3, false, null);
-
         given(orderTableDao.findById(any(Long.class))).willReturn(Optional.of(좌석));
-        given(orderTableDao.save(any(OrderTable.class))).willReturn(좌석);
 
+        // when
+        when(orderTableDao.save(any(OrderTable.class))).thenReturn(좌석);
         좌석 = tableService.changeNumberOfGuests(1L, 좌석);
 
         // then

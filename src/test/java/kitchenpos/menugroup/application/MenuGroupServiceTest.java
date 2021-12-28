@@ -39,7 +39,7 @@ public class MenuGroupServiceTest {
     @Test
     void create() {
         // given
-        given(menuGroupDao.save(any(MenuGroup.class))).willReturn(menuGroup);
+        when(menuGroupDao.save(any(MenuGroup.class))).thenReturn(menuGroup);
         MenuGroup expected = menuGroupService.create(menuGroup);
 
         //then

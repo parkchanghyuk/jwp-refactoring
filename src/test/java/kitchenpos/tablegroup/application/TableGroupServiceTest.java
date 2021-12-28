@@ -41,12 +41,11 @@ public class TableGroupServiceTest {
         OrderTable orderTable = 좌석_정보(1L, 0, true, null);
         OrderTable orderTable2 = 좌석_정보(2L, 0, true, null);
         TableGroup tableGroup = 단체_좌석_정보(1L, orderTable, orderTable2);
-
         given(orderTableDao.findAllByIdIn(anyList())).willReturn(Arrays.asList(orderTable, orderTable2));
-        given(tableGroupDao.save(any())).willReturn(tableGroup);
-        given(orderTableDao.save(any())).willReturn(orderTable);
 
         // when
+        when(tableGroupDao.save(any())).thenReturn(tableGroup);
+        when(orderTableDao.save(any())).thenReturn(orderTable);
         tableGroup = tableGroupService.create(tableGroup);
 
         // then
@@ -61,12 +60,11 @@ public class TableGroupServiceTest {
         OrderTable orderTable = 좌석_정보(1L, 0, false, 1L);
         OrderTable orderTable2 = 좌석_정보(2L, 0, false, 1L);
         TableGroup tableGroup = 단체_좌석_정보(1L, orderTable, orderTable2);
-
         given(orderTableDao.findAllByTableGroupId(any(Long.class))).willReturn(Arrays.asList(orderTable, orderTable2));
         given(orderDao.existsByOrderTableIdInAndOrderStatusIn(anyList(), anyList())).willReturn(false);
-        given(orderTableDao.save(any())).willReturn(orderTable, orderTable2);
 
         // when
+        when(orderTableDao.save(any())).thenReturn(orderTable, orderTable2);
         tableGroupService.ungroup(tableGroup.getId());
 
         // then
