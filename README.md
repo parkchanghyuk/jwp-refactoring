@@ -4,14 +4,17 @@
 ## 2단계 서비스 리팩터링
 ### 리팩토링
 * 기능 별 패키지 분리
-* JDBC → JPA 변경
+* *JDBC* → *JPA* 변경
   * `Entity`
   * `Repository`
-* DTO 설정 
+* *DTO* 설정 
   * `Request`
   * `Response`
-* `Service` 로직 `Domain` 으로 이동
-* `Test` 로직 확인
+* *Entity* 설정
+  * 원시값 포장 
+  * 연관관계 설정
+* *Service* 로직 *Domain* 으로 이동
+* *Test* 로직 확인
 
 ---
 
