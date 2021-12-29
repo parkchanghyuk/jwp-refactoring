@@ -1,7 +1,21 @@
 # 키친포스
 
 ---
+## 2단계 서비스 리팩터링
+### 리팩토링
+* 기능 별 패키지 분리
+* JDBC → JPA 변경
+  * `Entity`
+  * `Repository`
+* DTO 설정 
+  * `Request`
+  * `Response`
+* `Service` 로직 `Domain` 으로 이동
+* `Test` 로직 확인
 
+---
+
+## 1단계 테스트를 통한 코드 보호 
 ## 요구 사항
 ### 상품 `Product`
 * 상품을 등록한다.
