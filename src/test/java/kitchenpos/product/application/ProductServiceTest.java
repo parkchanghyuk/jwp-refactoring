@@ -16,8 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.product.domain.ProductDao;
 import kitchenpos.product.domain.Product;
+import kitchenpos.product.domain.ProductRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
@@ -25,7 +25,7 @@ public class ProductServiceTest {
     private ProductService productService;
 
     @Mock
-    private ProductDao productDao;
+    private ProductRepository productRepository;
 
     private Product product;
 
@@ -38,7 +38,7 @@ public class ProductServiceTest {
     @Test
     void create() {
         // when
-        when(productDao.save(any(Product.class))).thenReturn(product);
+        when(productRepository.save(any(Product.class))).thenReturn(product);
         Product expectedProduct = productService.create(product);
 
         // then
@@ -51,7 +51,7 @@ public class ProductServiceTest {
     @Test
     void list() {
         // given
-        given(productDao.findAll()).willReturn(Arrays.asList(product));
+        given(productRepository.findAll()).willReturn(Arrays.asList(product));
         List<Product> products = productService.list();
 
         // then

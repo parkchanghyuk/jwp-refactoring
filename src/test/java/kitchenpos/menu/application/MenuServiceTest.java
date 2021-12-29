@@ -19,11 +19,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import kitchenpos.menu.domain.MenuDao;
 import kitchenpos.menugroup.domain.MenuGroupDao;
 import kitchenpos.menugroup.domain.MenuProductDao;
-import kitchenpos.product.domain.ProductDao;
 import kitchenpos.menu.domain.Menu;
 import kitchenpos.menugroup.domain.MenuGroup;
 import kitchenpos.menu.domain.MenuProduct;
 import kitchenpos.product.domain.Product;
+import kitchenpos.product.domain.ProductRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuServiceTest {
@@ -34,7 +34,7 @@ public class MenuServiceTest {
     @Mock
     private MenuProductDao menuProductDao;
     @Mock
-    private ProductDao productDao;
+    private ProductRepository productRepository;
 
     @InjectMocks
     private MenuService menuService;
@@ -56,7 +56,7 @@ public class MenuServiceTest {
     void createMenu() {
         Menu 제육볶음_메뉴 = 메뉴_생성("제육볶음정식", 6000, 분식.getId(), 제육볶음_상품);
         given(menuGroupDao.existsById(any(Long.class))).willReturn(true);
-        given(productDao.findById(any(Long.class))).willReturn(Optional.of(제육볶음));
+        given(productRepository.findById(any(Long.class))).willReturn(Optional.of(제육볶음));
 
         when(menuDao.save(any(Menu.class))).thenReturn(제육볶음_메뉴);
         when(menuProductDao.save(any(MenuProduct.class))).thenReturn(제육볶음_상품);
