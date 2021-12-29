@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.domain.Product;
+import kitchenpos.product.domain.Product;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTestHelper {

@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import kitchenpos.domain.OrderTable;
+import kitchenpos.table.domain.OrderTable;
 
 public class TableAcceptanceTestHelper {
     public static ExtractableResponse<Response> 좌석_등록_되어_있음(boolean empty, int numberOfGuests, Long tableGroupId) {

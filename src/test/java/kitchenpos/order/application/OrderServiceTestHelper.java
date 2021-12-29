@@ -2,9 +2,9 @@ package kitchenpos.order.application;
 
 import java.util.Arrays;
 
-import kitchenpos.domain.Order;
-import kitchenpos.domain.OrderLineItem;
-import kitchenpos.domain.OrderStatus;
+import kitchenpos.order.domain.Order;
+import kitchenpos.order.domain.OrderLineItem;
+import kitchenpos.order.domain.OrderStatus;
 
 public class OrderServiceTestHelper {
     public static OrderLineItem 주문_상품_생성(Long id, int quantity) {

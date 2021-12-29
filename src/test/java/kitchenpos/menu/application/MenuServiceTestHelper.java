@@ -3,8 +3,8 @@ package kitchenpos.menu.application;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import kitchenpos.domain.Menu;
-import kitchenpos.domain.MenuProduct;
+import kitchenpos.menu.domain.Menu;
+import kitchenpos.menu.domain.MenuProduct;
 
 public class MenuServiceTestHelper {
     public static Menu 메뉴_생성(String name, int price, Long menuGroupId, MenuProduct... menuProducts) {

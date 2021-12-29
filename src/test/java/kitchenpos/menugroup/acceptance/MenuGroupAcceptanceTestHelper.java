@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import kitchenpos.domain.MenuGroup;
+import kitchenpos.menugroup.domain.MenuGroup;
 
 public class MenuGroupAcceptanceTestHelper {
     public static ExtractableResponse<Response> 메뉴그룹_등록되어_있음(String name) {
