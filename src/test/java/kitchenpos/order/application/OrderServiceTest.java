@@ -23,7 +23,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import kitchenpos.menu.domain.MenuRepository;
 import kitchenpos.order.domain.OrderLineItemRepository;
 import kitchenpos.order.domain.OrderRepository;
-import kitchenpos.table.domain.OrderTableDao;
 import kitchenpos.menu.domain.Menu;
 import kitchenpos.menugroup.domain.MenuGroup;
 import kitchenpos.menu.domain.MenuProduct;
@@ -32,6 +31,7 @@ import kitchenpos.order.domain.OrderLineItem;
 import kitchenpos.order.domain.OrderStatus;
 import kitchenpos.table.domain.OrderTable;
 import kitchenpos.product.domain.Product;
+import kitchenpos.table.domain.OrderTableRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
@@ -42,7 +42,7 @@ public class OrderServiceTest {
     @Mock
     OrderLineItemRepository orderLineItemRepository;
     @Mock
-    OrderTableDao orderTableDao;
+    OrderTableRepository orderTableRepository;
 
     @InjectMocks
     OrderService orderService;
@@ -72,7 +72,7 @@ public class OrderServiceTest {
         OrderLineItem 제육볶음_주문 = 주문_상품_생성(제육볶음_메뉴.getId(), 2);
         Order 주문 = 주문_생성(1L, 좌석1.getId(), OrderStatus.COOKING, 제육볶음_주문);
         given(menuRepository.countByIdIn(anyList())).willReturn(1L);
-        given(orderTableDao.findById(any())).willReturn(Optional.of(좌석1));
+        given(orderTableRepository.findById(any())).willReturn(Optional.of(좌석1));
 
         // when
         when(orderRepository.save(any())).thenReturn(주문);
