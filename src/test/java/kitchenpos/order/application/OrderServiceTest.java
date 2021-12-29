@@ -20,8 +20,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.order.domain.OrderDao;
-import kitchenpos.order.domain.OrderLineItemDao;
+import kitchenpos.menu.domain.MenuRepository;
+import kitchenpos.order.domain.OrderLineItemRepository;
+import kitchenpos.order.domain.OrderRepository;
 import kitchenpos.table.domain.OrderTableDao;
 import kitchenpos.menu.domain.Menu;
 import kitchenpos.menugroup.domain.MenuGroup;
@@ -35,11 +36,11 @@ import kitchenpos.product.domain.Product;
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
     @Mock
-    MenuDao menuDao;
+    MenuRepository menuRepository;
     @Mock
-    OrderDao orderDao;
+    OrderRepository orderRepository;
     @Mock
-    OrderLineItemDao orderLineItemDao;
+    OrderLineItemRepository orderLineItemRepository;
     @Mock
     OrderTableDao orderTableDao;
 
@@ -70,12 +71,12 @@ public class OrderServiceTest {
         //given
         OrderLineItem 제육볶음_주문 = 주문_상품_생성(제육볶음_메뉴.getId(), 2);
         Order 주문 = 주문_생성(1L, 좌석1.getId(), OrderStatus.COOKING, 제육볶음_주문);
-        given(menuDao.countByIdIn(anyList())).willReturn(1L);
+        given(menuRepository.countByIdIn(anyList())).willReturn(1L);
         given(orderTableDao.findById(any())).willReturn(Optional.of(좌석1));
 
         // when
-        when(orderDao.save(any())).thenReturn(주문);
-        when(orderLineItemDao.save(any())).thenReturn(제육볶음_주문);
+        when(orderRepository.save(any())).thenReturn(주문);
+        when(orderLineItemRepository.save(any())).thenReturn(제육볶음_주문);
         Order expected = orderService.create(주문);
 
         // then
@@ -88,8 +89,8 @@ public class OrderServiceTest {
         //given
         OrderLineItem 제육볶음_주문 = 주문_상품_생성(제육볶음_메뉴.getId(), 2);
         Order 주문 = 주문_생성(1L, 좌석1.getId(), OrderStatus.COOKING, 제육볶음_주문);
-        given(orderDao.findAll()).willReturn(Arrays.asList(주문));
-        given(orderLineItemDao.findAllByOrderId(any(Long.class))).willReturn(Arrays.asList(제육볶음_주문));
+        given(orderRepository.findAll()).willReturn(Arrays.asList(주문));
+        given(orderLineItemRepository.findAllByOrderId(any(Long.class))).willReturn(Arrays.asList(제육볶음_주문));
 
         // when
         List<Order> orderList = orderService.list();
@@ -105,9 +106,9 @@ public class OrderServiceTest {
         OrderLineItem 제육볶음_주문 = 주문_상품_생성(제육볶음_메뉴.getId(), 2);
         Order 주문 = 주문_생성(1L, 좌석1.getId(), OrderStatus.COOKING, 제육볶음_주문);
         Order 주문_상태변경 = 주문_생성(1L, 좌석1.getId(), OrderStatus.MEAL, 제육볶음_주문);
-        given(orderDao.findById(any(Long.class))).willReturn(Optional.of(주문));
-        given(orderDao.save(any(Order.class))).willReturn(주문_상태변경);
-        given(orderLineItemDao.findAllByOrderId(any(Long.class))).willReturn(Arrays.asList(제육볶음_주문));
+        given(orderRepository.findById(any(Long.class))).willReturn(Optional.of(주문));
+        given(orderRepository.save(any(Order.class))).willReturn(주문_상태변경);
+        given(orderLineItemRepository.findAllByOrderId(any(Long.class))).willReturn(Arrays.asList(제육볶음_주문));
 
         // when
         Order expected = orderService.changeOrderStatus(주문.getId(), 주문_상태변경);

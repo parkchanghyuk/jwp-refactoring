@@ -3,12 +3,30 @@ package kitchenpos.order.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private Long orderTableId;
+    @Column
     private String orderStatus;
+    @Column
     private LocalDateTime orderedTime;
+    @OneToMany
     private List<OrderLineItem> orderLineItems;
+
+    public Order() {
+    }
 
     public Long getId() {
         return id;

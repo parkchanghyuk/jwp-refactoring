@@ -1,10 +1,25 @@
 package kitchenpos.order.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class OrderLineItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long seq;
+    @Column
     private Long orderId;
+    @Column
     private Long menuId;
+    @Column
     private long quantity;
+
+    public OrderLineItem() {
+    }
 
     public Long getSeq() {
         return seq;
