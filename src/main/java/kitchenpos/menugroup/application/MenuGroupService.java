@@ -13,7 +13,7 @@ import kitchenpos.menugroup.domain.MenuGroupRepository;
 public class MenuGroupService {
     private final MenuGroupRepository menuGroupRepository;
 
-    public MenuGroupService(final MenuGroupRepository menuGroupRepository) {
+    public MenuGroupService(MenuGroupRepository menuGroupRepository) {
         this.menuGroupRepository = menuGroupRepository;
     }
 

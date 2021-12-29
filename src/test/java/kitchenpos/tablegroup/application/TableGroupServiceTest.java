@@ -15,18 +15,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.tablegroup.domain.TableGroupDao;
+import kitchenpos.order.domain.OrderRepository;
 import kitchenpos.table.domain.OrderTable;
+import kitchenpos.table.domain.OrderTableRepository;
 import kitchenpos.tablegroup.domain.TableGroup;
+import kitchenpos.tablegroup.domain.TableGroupRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class TableGroupServiceTest {
     @Mock
-    OrderTableDao orderTableDao;
+    OrderTableRepository orderTableRepository;
     @Mock
-    TableGroupDao tableGroupDao;
+    TableGroupRepository tableGroupRepository;
     @Mock
-    OrderDao orderDao;
+    OrderRepository orderRepository;
 
     @InjectMocks
     TableGroupService tableGroupService;
@@ -38,11 +40,11 @@ public class TableGroupServiceTest {
         OrderTable orderTable = 좌석_정보(1L, 0, true, null);
         OrderTable orderTable2 = 좌석_정보(2L, 0, true, null);
         TableGroup tableGroup = 단체_좌석_정보(1L, orderTable, orderTable2);
-        given(orderTableDao.findAllByIdIn(anyList())).willReturn(Arrays.asList(orderTable, orderTable2));
+        given(orderTableRepository.findAllByIdIn(anyList())).willReturn(Arrays.asList(orderTable, orderTable2));
 
         // when
-        when(tableGroupDao.save(any())).thenReturn(tableGroup);
-        when(orderTableDao.save(any())).thenReturn(orderTable);
+        when(tableGroupRepository.save(any())).thenReturn(tableGroup);
+        when(orderTableRepository.save(any())).thenReturn(orderTable);
         tableGroup = tableGroupService.create(tableGroup);
 
         // then
@@ -57,11 +59,11 @@ public class TableGroupServiceTest {
         OrderTable orderTable = 좌석_정보(1L, 0, false, 1L);
         OrderTable orderTable2 = 좌석_정보(2L, 0, false, 1L);
         TableGroup tableGroup = 단체_좌석_정보(1L, orderTable, orderTable2);
-        given(orderTableDao.findAllByTableGroupId(any(Long.class))).willReturn(Arrays.asList(orderTable, orderTable2));
-        given(orderDao.existsByOrderTableIdInAndOrderStatusIn(anyList(), anyList())).willReturn(false);
+        given(orderTableRepository.findAllByTableGroupId(any(Long.class))).willReturn(Arrays.asList(orderTable, orderTable2));
+        given(orderRepository.existsByOrderTableIdInAndOrderStatusIn(anyList(), anyList())).willReturn(false);
 
         // when
-        when(orderTableDao.save(any())).thenReturn(orderTable, orderTable2);
+        when(orderTableRepository.save(any())).thenReturn(orderTable, orderTable2);
         tableGroupService.ungroup(tableGroup.getId());
 
         // then
