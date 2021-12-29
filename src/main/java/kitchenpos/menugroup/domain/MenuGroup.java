@@ -15,7 +15,7 @@ public class MenuGroup {
     @Column
     private String name;
 
-    protected MenuGroup() {
+    public MenuGroup() {
     }
 
     public MenuGroup(String name) {
@@ -30,4 +30,11 @@ public class MenuGroup {
         return name;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -20,7 +20,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.menu.domain.MenuDao;
 import kitchenpos.order.domain.OrderDao;
 import kitchenpos.order.domain.OrderLineItemDao;
 import kitchenpos.table.domain.OrderTableDao;

@@ -28,11 +28,7 @@ public class MenuAcceptanceTestHelper {
     }
 
     public static ExtractableResponse 메뉴_등록_요청(String name, int price, Long id, MenuProduct... menuProducts) {
-        Menu menu = new Menu();
-        menu.setName(name);
-        menu.setPrice(BigDecimal.valueOf(price));
-        menu.setMenuGroupId(id);
-        menu.setMenuProducts(Arrays.asList(menuProducts));
+        Menu menu = new Menu(name, BigDecimal.valueOf(price), id, Arrays.asList(menuProducts));
         return RestAssured
             .given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -42,9 +38,7 @@ public class MenuAcceptanceTestHelper {
     }
 
     public static MenuProduct 메뉴_상품(Long productId, int quantity) {
-        MenuProduct menuProduct = new MenuProduct();
-        menuProduct.setProductId(productId);
-        menuProduct.setQuantity(quantity);
+        MenuProduct menuProduct = new MenuProduct(productId, quantity);
         return menuProduct;
     }
 
