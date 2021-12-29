@@ -16,13 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import kitchenpos.menugroup.domain.MenuGroupDao;
 import kitchenpos.menugroup.domain.MenuGroup;
+import kitchenpos.menugroup.domain.MenuGroupRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuGroupServiceTest {
     @Mock
-    private MenuGroupDao menuGroupDao;
+    private MenuGroupRepository menuGroupRepository;
 
     @InjectMocks
     private MenuGroupService menuGroupService;
@@ -38,7 +38,7 @@ public class MenuGroupServiceTest {
     @Test
     void create() {
         // given
-        when(menuGroupDao.save(any(MenuGroup.class))).thenReturn(menuGroup);
+        when(menuGroupRepository.save(any(MenuGroup.class))).thenReturn(menuGroup);
         MenuGroup expected = menuGroupService.create(menuGroup);
 
         //then
@@ -50,7 +50,7 @@ public class MenuGroupServiceTest {
     @Test
     void list() {
         // given
-        given(menuGroupDao.findAll()).willReturn(Arrays.asList(menuGroup));
+        given(menuGroupRepository.findAll()).willReturn(Arrays.asList(menuGroup));
         List<MenuGroup> expected = menuGroupService.list();
 
         // then

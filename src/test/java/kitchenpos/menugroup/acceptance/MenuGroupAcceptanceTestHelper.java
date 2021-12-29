@@ -16,8 +16,7 @@ public class MenuGroupAcceptanceTestHelper {
     }
 
     public static ExtractableResponse<Response> 메뉴그룹_등록_요청(String name) {
-        MenuGroup menuGroup = new MenuGroup();
-        menuGroup.setName(name);
+        MenuGroup menuGroup = new MenuGroup(name);
         return RestAssured
             .given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
