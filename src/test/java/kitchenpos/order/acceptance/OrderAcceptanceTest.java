@@ -14,10 +14,12 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import kitchenpos.AcceptanceTest;
 import kitchenpos.menu.domain.Menu;
+import kitchenpos.menu.dto.MenuProductRequest;
 import kitchenpos.menugroup.domain.MenuGroup;
 import kitchenpos.menu.domain.MenuProduct;
 import kitchenpos.order.domain.Order;
 import kitchenpos.order.domain.OrderStatus;
+import kitchenpos.product.dto.ProductResponse;
 import kitchenpos.table.domain.OrderTable;
 import kitchenpos.product.domain.Product;
 
@@ -26,7 +28,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
 
     OrderTable 좌석1;
     OrderTable 좌석2;
-    MenuProduct 제육볶음_메뉴;
+    MenuProductRequest 제육볶음_메뉴;
     MenuGroup 분식;
     Menu 제육볶음;
 
@@ -36,7 +38,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         super.setUp();
 
         // given
-        Product 제육볶음_상품 = 상품_등록되어_있음("제육볶음", 8900).as(Product.class);
+        ProductResponse 제육볶음_상품 = 상품_등록되어_있음("제육볶음", 8900).as(ProductResponse.class);
         제육볶음_메뉴 = 메뉴_상품(제육볶음_상품.getId(), 1);
         분식 = 메뉴그룹_등록되어_있음("분식").as(MenuGroup.class);
         제육볶음 = 메뉴_등록되어_있음("제육볶음", 7000, 분식.getId(), 제육볶음_메뉴).as(Menu.class);

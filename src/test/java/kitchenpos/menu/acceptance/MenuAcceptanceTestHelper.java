@@ -11,13 +11,13 @@ import org.springframework.http.MediaType;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import kitchenpos.menu.domain.Menu;
-import kitchenpos.menu.domain.MenuProduct;
+import kitchenpos.menu.dto.MenuProductRequest;
+import kitchenpos.menu.dto.MenuRequest;
 
 public class MenuAcceptanceTestHelper {
 
-    public static ExtractableResponse 메뉴_등록되어_있음(String name, int price, Long id, MenuProduct... menuProducts) {
-        return 메뉴_등록_요청(name, price, id, menuProducts);
+    public static ExtractableResponse 메뉴_등록되어_있음(String name, int price, Long id, MenuProductRequest... menuProductRequests) {
+        return 메뉴_등록_요청(name, price, id, menuProductRequests);
     }
 
     public static ExtractableResponse<Response> 메뉴_목록_조회_요청() {
@@ -27,18 +27,20 @@ public class MenuAcceptanceTestHelper {
             .then().log().all().extract();
     }
 
-    public static ExtractableResponse 메뉴_등록_요청(String name, int price, Long id, MenuProduct... menuProducts) {
-        Menu menu = new Menu(name, BigDecimal.valueOf(price), id, Arrays.asList(menuProducts));
+    public static ExtractableResponse 메뉴_등록_요청(String name, int price, Long id,
+        MenuProductRequest... menuProductRequests) {
+        MenuRequest menuRequest =
+            new MenuRequest(name, BigDecimal.valueOf(price), id, Arrays.asList(menuProductRequests));
         return RestAssured
             .given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(menu)
+            .body(menuRequest)
             .when().post("/api/menus")
             .then().log().all().extract();
     }
 
-    public static MenuProduct 메뉴_상품(Long productId, int quantity) {
-        MenuProduct menuProduct = new MenuProduct(productId, quantity);
+    public static MenuProductRequest 메뉴_상품(Long productId, int quantity) {
+        MenuProductRequest menuProduct = new MenuProductRequest(productId, quantity);
         return menuProduct;
     }
 
