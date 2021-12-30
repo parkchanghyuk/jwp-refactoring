@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import kitchenpos.menu.domain.Menu;
 import kitchenpos.menu.domain.MenuProductRepository;
+import kitchenpos.menu.domain.MenuRepository;
 import kitchenpos.menugroup.domain.MenuGroup;
 import kitchenpos.menu.domain.MenuProduct;
 import kitchenpos.menugroup.domain.MenuGroupRepository;
@@ -27,7 +28,7 @@ import kitchenpos.product.domain.ProductRepository;
 @ExtendWith(MockitoExtension.class)
 public class MenuServiceTest {
     @Mock
-    private MenuDao menuDao;
+    private MenuRepository menuRepository;
     @Mock
     private MenuGroupRepository menuGroupRepository;
     @Mock
@@ -57,7 +58,7 @@ public class MenuServiceTest {
         given(menuGroupRepository.existsById(any(Long.class))).willReturn(true);
         given(productRepository.findById(any(Long.class))).willReturn(Optional.of(제육볶음));
 
-        when(menuDao.save(any(Menu.class))).thenReturn(제육볶음_메뉴);
+        when(menuRepository.save(any(Menu.class))).thenReturn(제육볶음_메뉴);
         when(menuProductRepository.save(any(MenuProduct.class))).thenReturn(제육볶음_상품);
 
         제육볶음_메뉴 = menuService.create(제육볶음_메뉴);

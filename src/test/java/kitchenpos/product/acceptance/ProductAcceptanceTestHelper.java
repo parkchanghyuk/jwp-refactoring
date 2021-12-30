@@ -11,6 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import kitchenpos.product.domain.Product;
+import kitchenpos.product.dto.ProductRequest;
 
 public class ProductAcceptanceTestHelper {
 
@@ -26,13 +27,11 @@ public class ProductAcceptanceTestHelper {
     }
 
     public static ExtractableResponse<Response> 상품_등록_요청(String name, int price) {
-        Product product = new Product();
-        product.setName(name);
-        product.setPrice(BigDecimal.valueOf(price));
+        ProductRequest productRequest = new ProductRequest(name, BigDecimal.valueOf(price));
         return RestAssured
             .given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(product)
+            .body(productRequest)
             .when().post("/api/products")
             .then().log().all().extract();
     }

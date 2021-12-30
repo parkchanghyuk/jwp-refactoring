@@ -10,10 +10,6 @@ import kitchenpos.product.domain.Product;
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTestHelper {
     public static Product 상품_생성(Long id, String name, int price) {
-        Product product = new Product();
-        product.setId(id);
-        product.setName(name);
-        product.setPrice(BigDecimal.valueOf(price));
-        return product;
+        return new Product(id, name, BigDecimal.valueOf(price));
     }
 }
